@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServiceHub - Find & Book Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="px-4 py-3 flex items-center justify-between">
+            <h1 class="text-xl font-bold text-blue-600">ServiceHub</h1>
+            <div class="flex gap-4">
+                <button class="text-gray-600"><i class="fas fa-bell"></i></button>
+                <button class="text-gray-600"><i class="fas fa-user-circle text-xl"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div id="app-content">
+        <!-- Home / Service Browsing Screen -->
+        <div id="home-screen">
+            <!-- Search Bar -->
+            <div class="p-4 bg-white">
+                <div class="relative">
+                    <input type="text" placeholder="Search services..." class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <i class="fas fa-search absolute left-3 top-4 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="px-4 py-3 bg-white border-b overflow-x-auto">
+                <div class="flex gap-2 whitespace-nowrap">
+                    <button class="px-4 py-2 bg-blue-600 text-white rounded-full text-sm">All</button>
+                    <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm">Location</button>
+                    <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm">Price</button>
+                    <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm">Rating</button>
+                </div>
+            </div>
+
+            <!-- Service Categories -->
+            <div class="p-4">
+                <h2 class="text-lg font-semibold mb-3">Categories</h2>
+                <div class="grid grid-cols-3 gap-3">
+                    <button onclick="showServices('Plumbing')" class="bg-white p-4 rounded-lg shadow-sm text-center hover:shadow-md transition">
+                        <i class="fas fa-wrench text-2xl text-blue-600 mb-2"></i>
+                        <p class="text-sm font-medium">Plumbing</p>
+                    </button>
+                    <button onclick="showServices('Cleaning')" class="bg-white p-4 rounded-lg shadow-sm text-center hover:shadow-md transition">
+                        <i class="fas fa-broom text-2xl text-green-600 mb-2"></i>
+                        <p class="text-sm font-medium">Cleaning</p>
+                    </button>
+                    <button onclick="showServices('Electrical')" class="bg-white p-4 rounded-lg shadow-sm text-center hover:shadow-md transition">
+                        <i class="fas fa-bolt text-2xl text-yellow-600 mb-2"></i>
+                        <p class="text-sm font-medium">Electrical</p>
+                    </button>
+                    <button onclick="showServices('Painting')" class="bg-white p-4 rounded-lg shadow-sm text-center hover:shadow-md transition">
+                        <i class="fas fa-paint-roller text-2xl text-purple-600 mb-2"></i>
+                        <p class="text-sm font-medium">Painting</p>
+                    </button>
+                    <button onclick="showServices('Carpentry')" class="bg-white p-4 rounded-lg shadow-sm text-center hover:shadow-md transition">
+                        <i class="fas fa-hammer text-2xl text-orange-600 mb-2"></i>
+                        <p class="text-sm font-medium">Carpentry</p>
+                    </button>
+                    <button onclick="showServices('AC Repair')" class="bg-white p-4 rounded-lg shadow-sm text-center hover:shadow-md transition">
+                        <i class="fas fa-fan text-2xl text-cyan-600 mb-2"></i>
+                        <p class="text-sm font-medium">AC Repair</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Featured Providers -->
+            <div class="p-4">
+                <h2 class="text-lg font-semibold mb-3">Top Rated Providers</h2>
+                <div class="space-y-3">
+                    <div onclick="showProviderProfile()" class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="flex gap-3">
+                            <img src="https://i.pravatar.cc/80?img=12" alt="Provider" class="w-16 h-16 rounded-full">
+                            <div class="flex-1">
+                                <h3 class="font-semibold">John Smith</h3>
+                                <p class="text-sm text-gray-600">Plumbing Expert</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">4.8 (127)</span>
+                                </div>
+                                <p class="text-sm text-blue-600 font-medium mt-1">$50/hr</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div onclick="showProviderProfile()" class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="flex gap-3">
+                            <img src="https://i.pravatar.cc/80?img=5" alt="Provider" class="w-16 h-16 rounded-full">
+                            <div class="flex-1">
+                                <h3 class="font-semibold">Maria Garcia</h3>
+                                <p class="text-sm text-gray-600">Cleaning Specialist</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600">5.0 (89)</span>
+                                </div>
+                                <p class="text-sm text-blue-600 font-medium mt-1">$40/hr</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Provider Profile Screen -->
+        <div id="provider-profile" class="hidden">
+            <div class="bg-white">
+                <button onclick="showHome()" class="p-4 text-blue-600">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+
+            <div class="bg-gradient-to-b from-blue-600 to-blue-700 text-white p-6 text-center">
+                <img src="https://i.pravatar.cc/120?img=12" alt="Provider" class="w-24 h-24 rounded-full mx-auto mb-3 border-4 border-white">
+                <h2 class="text-xl font-bold">John Smith</h2>
+                <p class="text-blue-100">Plumbing Expert</p>
+                <div class="flex items-center justify-center gap-2 mt-2">
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span>4.8 (127 reviews)</span>
+                </div>
+                <div class="flex items-center justify-center gap-1 mt-2">
+                    <i class="fas fa-check-circle"></i>
+                    <span class="text-sm">KYC Verified</span>
+                </div>
+            </div>
+
+            <div class="p-4 space-y-4">
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-2">About</h3>
+                    <p class="text-gray-600 text-sm">Licensed plumber with 10+ years of experience. Specializing in residential and commercial plumbing repairs, installations, and emergency services.</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-2">Skills & Services</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">Pipe Repair</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">Drain Cleaning</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">Water Heater</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">Emergency Service</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-2">Service Areas</h3>
+                    <div class="flex items-center gap-2 text-gray-600">
+                        <i class="fas fa-map-marker-alt text-blue-600"></i>
+                        <span class="text-sm">Downtown, Midtown, Uptown (5 mile radius)</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-2">Pricing</h3>
+                    <p class="text-2xl font-bold text-blue-600">$50<span class="text-sm text-gray-600 font-normal">/hour</span></p>
+                    <p class="text-xs text-gray-500 mt-1">Minimum 2 hours | Emergency service +$25</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">Availability</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Monday - Friday</span>
+                            <span class="font-medium">8:00 AM - 6:00 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Saturday</span>
+                            <span class="font-medium">9:00 AM - 4:00 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Sunday</span>
+                            <span class="font-medium text-red-600">Closed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="showBooking()" class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 transition">
+                    Book Service
+                </button>
+            </div>
+        </div>
+
+        <!-- Booking Screen -->
+        <div id="booking-screen" class="hidden">
+            <div class="bg-white sticky top-14 z-40 border-b">
+                <button onclick="showProviderProfile()" class="p-4 text-blue-600">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h2 class="text-xl font-bold px-4 pb-4">Book Service</h2>
+            </div>
+
+            <div class="p-4 space-y-4">
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">Service Type</h3>
+                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>Pipe Repair</option>
+                        <option>Drain Cleaning</option>
+                        <option>Water Heater Installation</option>
+                        <option>Emergency Service</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">Description</h3>
+                    <textarea placeholder="Describe your issue..." class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-24 resize-none"></textarea>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">Provider Selection</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="provider" value="specific" checked class="mr-3">
+                            <div class="flex items-center gap-3 flex-1">
+                                <img src="https://i.pravatar.cc/40?img=12" alt="Provider" class="w-10 h-10 rounded-full">
+                                <div>
+                                    <p class="font-medium">John Smith</p>
+                                    <p class="text-xs text-gray-600">$50/hr • 4.8★</p>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="provider" value="auto" class="mr-3">
+                            <div>
+                                <p class="font-medium">Auto-assign</p>
+                                <p class="text-xs text-gray-600">We'll find the best available provider</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">Preferred Date & Time</h3>
+                    <div class="space-y-3">
+                        <input type="date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="time" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">Location</h3>
+                    <input type="text" placeholder="Enter your address" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-700">Estimated Cost</span>
+                        <span class="font-bold text-lg">$100</span>
+                    </div>
+                    <p class="text-xs text-gray-600">Based on 2 hours minimum</p>
+                </div>
+
+                <button onclick="confirmBooking()" class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 transition">
+                    Confirm Booking
+                </button>
+            </div>
+        </div>
+
+        <!-- Provider Registration Screen -->
+        <div id="registration-screen" class="hidden">
+            <div class="bg-white sticky top-14 z-40 border-b">
+                <button onclick="showHome()" class="p-4 text-blue-600">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h2 class="text-xl font-bold px-4 pb-4">Become a Provider</h2>
+            </div>
+
+            <div class="p-4 space-y-4">
+                <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-info-circle text-blue-600 mt-1"></i>
+                        <div>
+                            <p class="font-semibold text-blue-900">KYC Verification Required</p>
+                            <p class="text-sm text-blue-800 mt-1">All providers must complete identity verification to ensure platform safety.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">Personal Information</h3>
+                    <div class="space-y-3">
+                        <input type="text" placeholder="Full Name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="email" placeholder="Email Address" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="tel" placeholder="Phone Number" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">Profile Photo</h3>
+                    <div class="flex items-center gap-4">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center">
+                            <i class="fas fa-camera text-gray-400 text-2xl"></i>
+                        </div>
+                        <button class="px-4 py-2 bg-blue-100 text-blue-600 rounded-lg text-sm font-medium">Upload Photo</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">Service Category</h3>
+                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>Select a category</option>
+                        <option>Plumbing</option>
+                        <option>Cleaning</option>
+                        <option>Electrical</option>
+                        <option>Painting</option>
+                        <option>Carpentry</option>
+                        <option>AC Repair</option>
+                    </select>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">Skills & Expertise</h3>
+                    <textarea placeholder="Describe your skills and services..." class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-24 resize-none"></textarea>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">Experience</h3>
+                    <input type="number" placeholder="Years of experience" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">Service Area</h3>
+                    <input type="text" placeholder="Enter service areas (e.g., Downtown, Midtown)" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3">
+                    <input type="number" placeholder="Service radius (miles)" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">Pricing</h3>
+                    <div class="flex gap-3">
+                        <input type="number" placeholder="Hourly rate" class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option>USD</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">Availability</h3>
+                    <div class="space-y-2 text-sm">
+                        <label class="flex items-center justify-between">
+                            <span>Monday - Friday</span>
+                            <input type="checkbox" checked class="w-5 h-5">
+                        </label>
+                        <label class="flex items-center justify-between">
+                            <span>Saturday</span>
+                            <input type="checkbox" checked class="w-5 h-5">
+                        </label>
+                        <label class="flex items-center justify-between">
+                            <span>Sunday</span>
+                            <input type="checkbox" class="w-5 h-5">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h3 class="font-semibold mb-3">KYC Documents</h3>
+                    <div class="space-y-3">
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                            <i class="fas fa-id-card text-3xl text-gray-400 mb-2"></i>
+                            <p class="text-sm text-gray-600 mb-2">Government ID</p>
+                            <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm">Upload Document</button>
+                        </div>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                            <i class="fas fa-file-alt text-3xl text-gray-400 mb-2"></i>
+                            <p class="text-sm text-gray-600 mb-2">Certification (Optional)</p>
+                            <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm">Upload Document</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="submitRegistration()" class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 transition">
+                    Submit Application
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bg-white border-t fixed bottom-0 left-0 right-0 z-50">
+        <div class="flex justify-around py-2">
+            <button onclick="showHome()" class="flex flex-col items-center py-2 px-4 text-blue-600">
+                <i class="fas fa-home text-xl mb-1"></i>
+                <span class="text-xs">Home</span>
+            </button>
+            <button onclick="showHome()" class="flex flex-col items-center py-2 px-4 text-gray-400">
+                <i class="fas fa-calendar-check text-xl mb-1"></i>
+                <span class="text-xs">Bookings</span>
+            </button>
+            <button onclick="showHome()" class="flex flex-col items-center py-2 px-4 text-gray-400">
+                <i class="fas fa-comments text-xl mb-1"></i>
+                <span class="text-xs">Messages</span>
+            </button>
+            <button onclick="showRegistration()" class="flex flex-col items-center py-2 px-4 text-gray-400">
+                <i class="fas fa-briefcase text-xl mb-1"></i>
+                <span class="text-xs">Provider</span>
+            </button>
+        </div>
+    </nav>
+
+    <script>
+        function showHome() {
+            document.getElementById('home-screen').classList.remove('hidden');
+            document.getElementById('provider-profile').classList.add('hidden');
+            document.getElementById('booking-screen').classList.add('hidden');
+            document.getElementById('registration-screen').classList.add('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function showProviderProfile() {
+            document.getElementById('home-screen').classList.add('hidden');
+            document.getElementById('provider-profile').classList.remove('hidden');
+            document.getElementById('booking-screen').classList.add('hidden');
+            document.getElementById('registration-screen').classList.add('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function showBooking() {
+            document.getElementById('home-screen').classList.add('hidden');
+            document.getElementById('provider-profile').classList.add('hidden');
+            document.getElementById('booking-screen').classList.remove('hidden');
+            document.getElementById('registration-screen').classList.add('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function showRegistration() {
+            document.getElementById('home-screen').classList.add('hidden');
+            document.getElementById('provider-profile').classList.add('hidden');
+            document.getElementById('booking-screen').classList.add('hidden');
+            document.getElementById('registration-screen').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function showServices(category) {
+            alert('Showing ' + category + ' services. This would filter the provider list.');
+        }
+
+        function confirmBooking() {
+            alert('Booking confirmed! You will receive a confirmation email shortly.');
+            showHome();
+        }
+
+        function submitRegistration() {
+            alert('Application submitted! We will review your documents and contact you within 2-3 business days.');
+            showHome();
+        }
+    </script>
+</body>
+</html>

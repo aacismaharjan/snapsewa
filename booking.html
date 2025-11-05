@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Service - ServiceHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <div class="bg-white sticky top-0 z-40 shadow-sm">
+        <div class="px-4 py-3 flex items-center">
+            <button class="text-blue-600 mr-3">
+                <i class="fas fa-arrow-left text-xl"></i>
+            </button>
+            <h1 class="text-xl font-bold">Book Service</h1>
+        </div>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="p-4 space-y-4 pb-24">
+        <!-- Selected Provider -->
+        <div class="bg-white rounded-lg shadow-sm p-4">
+            <h3 class="font-semibold mb-3">Provider</h3>
+            <div class="flex items-center gap-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                <img src="https://i.pravatar.cc/50?img=12" alt="Provider" class="w-12 h-12 rounded-full">
+                <div class="flex-1">
+                    <p class="font-semibold">John Smith</p>
+                    <p class="text-sm text-gray-600">Plumbing Expert</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <div class="flex text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="text-xs text-gray-600">4.8 (127)</span>
+                    </div>
+                </div>
+                <button class="text-blue-600 text-sm font-medium">Change</button>
+            </div>
+        </div>
+
+        <!-- Service Type -->
+        <div class="bg-white rounded-lg shadow-sm p-4">
+            <h3 class="font-semibold mb-3">Service Type</h3>
+            <select class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option>Select service type</option>
+                <option>Pipe Repair</option>
+                <option>Drain Cleaning</option>
+                <option>Water Heater Installation</option>
+                <option>Leak Detection</option>
+                <option>Bathroom Plumbing</option>
+                <option>Kitchen Plumbing</option>
+                <option>Emergency Service</option>
+                <option>Other</option>
+            </select>
+        </div>
+
+        <!-- Problem Description -->
+        <div class="bg-white rounded-lg shadow-sm p-4">
+            <h3 class="font-semibold mb-3">Describe Your Issue</h3>
+            <textarea placeholder="Please provide details about the problem you're experiencing..." class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-28 resize-none"></textarea>
+            <p class="text-xs text-gray-500 mt-2">Be as specific as possible to help the provider prepare</p>
+        </div>
+
+        <!-- Date & Time Selection -->
+        <div class="bg-white rounded-lg shadow-sm p-4">
+            <h3 class="font-semibold mb-3">Preferred Date & Time</h3>
+            <div class="space-y-3">
+                <div>
+                    <label class="text-sm text-gray-600 mb-1 block">Date</label>
+                    <input type="date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="text-sm text-gray-600 mb-1 block">Time</label>
+                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>Select time slot</option>
+                        <option>8:00 AM - 10:00 AM</option>
+                        <option>10:00 AM - 12:00 PM</option>
+                        <option>12:00 PM - 2:00 PM</option>
+                        <option>2:00 PM - 4:00 PM</option>
+                        <option>4:00 PM - 6:00 PM</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg flex items-start gap-2">
+                <i class="fas fa-info-circle text-yellow-600 mt-0.5"></i>
+                <p class="text-xs text-yellow-800">Provider will confirm availability within 2 hours</p>
+            </div>
+        </div>
+
+        <!-- Service Location -->
+        <div class="bg-white rounded-lg shadow-sm p-4">
+            <h3 class="font-semibold mb-3">Service Location</h3>
+            <input type="text" placeholder="Street address" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3">
+            <div class="grid grid-cols-2 gap-3">
+                <input type="text" placeholder="City" class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" placeholder="ZIP Code" class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <button class="mt-3 text-blue-600 text-sm font-medium flex items-center gap-2">
+                <i class="fas fa-map-marker-alt"></i>
+                Use current location
+            </button>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="bg-white rounded-lg shadow-sm p-4">
+            <h3 class="font-semibold mb-3">Contact Information</h3>
+            <div class="space-y-3">
+                <input type="text" placeholder="Full name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="tel" placeholder="Phone number" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="email" placeholder="Email address" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+        </div>
+
+        <!-- Urgency Level -->
+        <div class="bg-white rounded-lg shadow-sm p-4">
+            <h3 class="font-semibold mb-3">Urgency Level</h3>
+            <div class="space-y-2">
+                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                    <input type="radio" name="urgency" value="standard" checked class="mr-3">
+                    <div class="flex-1">
+                        <p class="font-medium">Standard</p>
+                        <p class="text-xs text-gray-600">Regular service within 24-48 hours</p>
+                    </div>
+                </label>
+                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                    <input type="radio" name="urgency" value="urgent" class="mr-3">
+                    <div class="flex-1">
+                        <p class="font-medium">Urgent</p>
+                        <p class="text-xs text-gray-600">Same day service • +$25</p>
+                    </div>
+                </label>
+                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                    <input type="radio" name="urgency" value="emergency" class="mr-3">
+                    <div class="flex-1">
+                        <p class="font-medium text-red-600">Emergency</p>
+                        <p class="text-xs text-gray-600">Immediate response • +$50</p>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <!-- Additional Notes -->
+        <div class="bg-white rounded-lg shadow-sm p-4">
+            <h3 class="font-semibold mb-3">Additional Notes (Optional)</h3>
+            <textarea placeholder="Any special instructions, access codes, parking information, etc." class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-20 resize-none"></textarea>
+        </div>
+
+        <!-- Photos (Optional) -->
+        <div class="bg-white rounded-lg shadow-sm p-4">
+            <h3 class="font-semibold mb-3">Add Photos (Optional)</h3>
+            <p class="text-sm text-gray-600 mb-3">Help the provider understand the issue better</p>
+            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                <i class="fas fa-camera text-3xl text-gray-400 mb-2"></i>
+                <p class="text-sm text-gray-600 mb-2">Upload photos of the problem</p>
+                <button class="px-4 py-2 bg-blue-100 text-blue-600 rounded-lg text-sm font-medium">
+                    <i class="fas fa-upload mr-2"></i>Choose Files
+                </button>
+            </div>
+        </div>
+
+        <!-- Price Summary -->
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200">
+            <h3 class="font-semibold mb-3">Price Estimate</h3>
+            <div class="space-y-2">
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-700">Base rate (2 hours min)</span>
+                    <span class="font-medium">$100.00</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-700">Service fee</span>
+                    <span class="font-medium">$5.00</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-700">Urgency charge</span>
+                    <span class="font-medium">$0.00</span>
+                </div>
+                <div class="border-t border-blue-300 pt-2 mt-2">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-lg">Total Estimate</span>
+                        <span class="font-bold text-2xl text-blue-600">$105.00</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-xs text-gray-600 mt-3">
+                <i class="fas fa-info-circle mr-1"></i>
+                Final price may vary based on actual time and materials used
+            </p>
+        </div>
+
+        <!-- Terms & Conditions -->
+        <div class="bg-white rounded-lg shadow-sm p-4">
+            <label class="flex items-start gap-3 cursor-pointer">
+                <input type="checkbox" class="mt-1 w-5 h-5">
+                <div class="text-sm">
+                    <p class="text-gray-700">I agree to the <span class="text-blue-600 font-medium">Terms & Conditions</span> and <span class="text-blue-600 font-medium">Cancellation Policy</span></p>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- Bottom Action Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t p-4 shadow-lg">
+        <button class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 transition active:scale-95">
+            Confirm Booking
+        </button>
+        <p class="text-center text-xs text-gray-500 mt-2">You'll receive confirmation within 2 hours</p>
+    </div>
+
+    <script>
+        // Add date restriction to prevent past dates
+        const dateInput = document.querySelector('input[type="date"]');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+
+        // Handle urgency selection and update price
+        document.querySelectorAll('input[name="urgency"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const urgencyCharge = document.querySelectorAll('.space-y-2 .text-sm')[2];
+                const totalElement = document.querySelector('.text-2xl.text-blue-600');
+                
+                let charge = 0;
+                if (e.target.value === 'urgent') charge = 25;
+                if (e.target.value === 'emergency') charge = 50;
+                
+                urgencyCharge.querySelector('.font-medium').textContent = `$${charge}.00`;
+                const newTotal = 105 + charge;
+                totalElement.textContent = `$${newTotal}.00`;
+            });
+        });
+
+        // Form submission
+        document.querySelector('.bg-blue-600').addEventListener('click', () => {
+            alert('Booking request submitted! You will receive a confirmation email shortly.');
+        });
+    </script>
+</body>
+</html>
