@@ -1,0 +1,12 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "tasks": {
+    "dev": {
+      "dependsOn": ["^dev"],
+      "cache": false
+    },
+    "build": {
+      "dependsOn": ["^build"]
+    }
+  }
+}
